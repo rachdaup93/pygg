@@ -1,0 +1,4 @@
+.unstyled::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+}

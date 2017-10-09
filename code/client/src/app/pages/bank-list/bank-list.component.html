@@ -1,0 +1,9 @@
+<div *ngFor="let bank of banks">
+  <h2>{{ bank.title }}</h2>
+  <p> ${{ bank.totalValue.toFixed(2) }}</p>
+  <p> {{ bank.dateFormatted }}</p>
+</div>
+
+<app-bank-form
+  (newBankNotifier)="addBankToList($event)"
+></app-bank-form>
