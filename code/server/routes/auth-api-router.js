@@ -128,4 +128,43 @@ router.get('/auth/facebook/callback',
   })
 );
 
+router.get("/auth/google", passport.authenticate("google", {
+  scope: ["https://www.googleapis.com/auth/plus.login",
+          "https://www.googleapis.com/auth/plus.profile.emails.read",
+          "https://www.googleapis.com/auth/calendar"]
+}));
+
+router.get("/auth/google/callback",
+passport.authenticate('google', (err, theUser, extraInfo) => {
+          if (err) {
+              res.status(500).json({ errorMessage: 'Login failed. 💩' });
+              return;
+          }
+
+          if (!theUser) {
+              res.status(401).json({ errorMessage: extraInfo.message });
+              return;
+          }
+
+          req.login(theUser, (err) => {
+              if (err) {
+                  res.status(500).json({ errorMessage: 'Login failed. 👽' });
+                  return;
+              }
+
+              // clear out the password before sending the user info
+              theUser.encryptedPassword = undefined;
+              res.status(200).json(theUser);
+          });
+      }),
+);
+
+// router.get("/auth/google/callback",
+// passport.authenticate('google', {
+//   successRedirect: '/',
+//   failureRedirect: '/login',
+//   failureFlash: true
+// }),
+// );
+
 module.exports = router;

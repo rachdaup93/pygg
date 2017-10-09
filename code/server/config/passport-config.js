@@ -160,3 +160,41 @@ passport.use(
     }
   ) // close new FbStrategy( ...
 );
+
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
+passport.use(
+  new GoogleStrategy({
+    clientID: process.env.google_app_id,
+    clientSecret: process.env.google_app_secret,
+    callbackURL: '/auth/google/callback',
+    proxy: true
+  },
+  (accessToken, refreshToken, profile, done) => {
+
+    UserModel.findOne(
+
+      { googleID: profile.id },
+
+      (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (user) {
+        return done(null, user);
+      }
+
+      const newUser = new UserModel({
+        googleID: profile.id,
+        email: profile.emails[0].value
+      });
+
+      newUser.save((err) => {
+        if (err) {
+          return done(err);
+        }
+        done(null, newUser);
+      });
+    });
+
+}));

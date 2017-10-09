@@ -6,7 +6,8 @@ export interface BankInfo {
   payments: {
     startDate: any;
     remainingCost: number,
-    period: number,
-    numberPaymentsLeft: number
+    period: string,
+    numberPaymentsLeft: number,
+    paymentLog: any[]
   }
 }

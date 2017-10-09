@@ -22,8 +22,9 @@ export class BankFormComponent implements OnInit {
     payments: {
       startDate: null,
       remainingCost: 0,
-      period: 0,
-      numberPaymentsLeft: 0
+      period: 'bi-weekly',
+      numberPaymentsLeft: 0,
+      paymentLog: []
     }
   };
 
@@ -41,8 +42,8 @@ export class BankFormComponent implements OnInit {
   newBankObject(){
     this.newBank.payments.remainingCost = this.newBank.totalValue;
     this.newBank.dateFormatted = moment(this.newBank.date).format("dddd, MMMM Do YYYY");
-    let test = this.calc.numberPeriod(this.newBank);
-    console.log(test);
+    this.newBank.payments.paymentLog = this.calc.numberPeriod(this.newBank);
+    this.newBank.payments.numberPaymentsLeft = this.newBank.payments.paymentLog.length;
 
     // console.log(this.calc.timeSpan(this.newBank.deadline));
 
@@ -60,8 +61,9 @@ export class BankFormComponent implements OnInit {
             payments: {
               startDate: null,
               remainingCost: 0,
-              period: 0,
-              numberPaymentsLeft: 0
+              period: 'bi-weekly',
+              numberPaymentsLeft: 0,
+              paymentLog: []
             }
           };
   })}

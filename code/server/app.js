@@ -9,6 +9,7 @@ const mongoose     = require('mongoose');
 const session      = require('express-session');
 const passport     = require('passport');
 const flash        = require('connect-flash');
+const cors         = require('cors');
 
 // Load environment variables from ".env" file (put this at the top)
 require('dotenv').config();
@@ -38,9 +39,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
+app.use(
+  cors({
+    credentials: true,
+    origin: [ 'http://localhost:4200' ]
+  })
+);
+
 app.use(session(
   {
-    secret: 'this string needs to be different for every app',
+    secret: 'this is super awesome fun time.',
     resave: true,
     saveUninitialized: true
   }
@@ -71,11 +79,14 @@ app.use((req, res, next) => {
 
 // ROUTES GO HERE ---------------------------------------------------
 
-const index = require('./routes/index');
-app.use('/', index);
+// const index = require('./routes/index');
+// app.use('/', index);
 
-const myAuthRoutes = require('./routes/auth-router.js');
-app.use(myAuthRoutes);
+// const myAuthRoutes = require('./routes/auth-api-router.js');
+// app.use(myAuthRoutes);
+
+const bankRoutes = require('./routes/bank-api-router.js');
+app.use('/api', bankRoutes);
 
 // END ROUTES -------------------------------------------------------
 

@@ -14,9 +14,9 @@ export class BankCalulationsService {
     const period = bank.payments.period;
 
     switch(period){
-      case '1': return this.logOfPayments(bank, 1,'days');
-      case '7': return this.logOfPayments(bank, 1,'weeks');
-      case '14': return this.logOfPayments(bank, 2,'weeks');
+      case 'daily': return this.logOfPayments(bank, 1,'days');
+      case 'weekly': return this.logOfPayments(bank, 1,'weeks');
+      case 'bi-weekly': return this.logOfPayments(bank, 2,'weeks');
       default: return this.logOfPayments(bank, 1, 'months');
     }
   }
@@ -29,6 +29,19 @@ export class BankCalulationsService {
       })
       period = period.add(increment, type);
     }
+    paymentLog = this.reoccurringPaymentValue(bank, paymentLog)
     return paymentLog;
+  }
+
+  reoccurringPaymentValue(bank, log){
+    let reoccurVal = bank.totalValue/log.length;
+    reoccurVal = Number(reoccurVal.toFixed(2));
+    const initVal = reoccurVal + bank.totalValue%reoccurVal
+    log[0].paymentVal = Number(initVal.toFixed(2));;
+
+    for(let i = 1; i < log.length; i++){
+      log[i].paymentVal = reoccurVal;
+    }
+    return log;
   }
 }

@@ -17,6 +17,8 @@ const userSchema = new Schema(
     // for Facebook login users
     facebookID: { type: String },
 
+    googleID: { type: String },
+
     // determines whether you are an admin or not
     role: {
       type: String,
