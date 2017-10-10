@@ -10,6 +10,9 @@ export class BankCalulationsService {
     let timeDifference = Number(deadline) - Number(now);
     return Math.ceil(timeDifference/(24*60*60*1000));
   }
+  newBankItem(){
+
+  }
   numberPeriod(bank){
     const period = bank.payments.period;
 
@@ -34,14 +37,26 @@ export class BankCalulationsService {
   }
 
   reoccurringPaymentValue(bank, log){
-    let reoccurVal = bank.totalValue/log.length;
+    let reoccurVal = bank.totalValue/(log.length);
     reoccurVal = Number(reoccurVal.toFixed(2));
-    const initVal = reoccurVal + bank.totalValue%reoccurVal
-    log[0].paymentVal = Number(initVal.toFixed(2));;
+    const additionalBalance = bank.totalValue - (reoccurVal*log.length);
+    let initVal = reoccurVal + additionalBalance;
+    if(initVal === 0){
+      initVal = reoccurVal;
+    }
+    log[0].paymentVal = Number(initVal.toFixed(2));
 
     for(let i = 1; i < log.length; i++){
       log[i].paymentVal = reoccurVal;
     }
     return log;
+  }
+
+  payDueAmount(bank){
+    bank.payments.remainingCost -= bank.payments.paymentLog[0].paymentVal
+    bank.payments.remainingCost = Number(bank.payments.remainingCost.toFixed(2))
+    bank.payments.paymentLog.splice(0,1);
+    bank.payments.numberPaymentsLeft--;
+    return bank;
   }
 }

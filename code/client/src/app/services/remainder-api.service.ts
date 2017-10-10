@@ -5,29 +5,23 @@ import { BankInfo } from '../interfaces/bank-info';
 import { environment } from '../../environments/environment';
 
 @Injectable()
-export class BankApiService {
+export class RemainderApiService {
   baseUrl: string = environment.apiUrl;
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getBanks(){
-    return this.http.get(
-      this.baseUrl + '/api/banks'
-    );}
-
-  addBank(bankObject: BankInfo){
+  addRemainder(remainderObject){
     return this.http.post(
-      this.baseUrl + '/api/banks',
-      bankObject
+      this.baseUrl + '/api/remainders',
+      remainderObject
     );}
 
-  editBank(bankObject){
-    let id = bankObject._id;
-    return this.http.put(
-      this.baseUrl + '/api/banks/' + id,
-      bankObject
+  sendNow(remainderObject){
+    return this.http.post(
+      this.baseUrl + '/api/remainders/newBankNotifier',
+      remainderObject
     );
   }
 }

@@ -1,10 +1,7 @@
 <div *ngFor="let bank of banks">
-  <h2>{{ bank.title }}</h2>
-  <p> ${{ bank.totalValue.toFixed(2) }}</p>
-  <p> Goal Date: {{ bank.dateFormatted }}</p>
-  <p> Remaining Balance: {{ bank.payments.remainingCost }}</p>
-  <p> Number Of Payments Left: {{ bank.payments.numberPaymentsLeft}}</p>
-  <p> Next Payment: ${{ bank.payments.paymentLog[0].paymentVal.toFixed(2) }} on {{ bank.payments.paymentLog[0].date }}</p>
+  <bank-item
+    [bankItem]="bank"
+  ></bank-item>
 </div>
 
 <app-bank-form

@@ -2,7 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { BankInfo } from '../../interfaces/bank-info';
 import { BankApiService } from '../../services/bank-api.service';
-import { BankCalulationsService } from '../../services/bank-calulations.service'
+import { RemainderApiService } from '../../services/remainder-api.service';
+import { BankCalulationsService } from '../../services/bank-calulations.service';
 import { environment } from '../../../environments/environment';
 
 import * as moment from 'moment'
@@ -33,7 +34,8 @@ export class BankFormComponent implements OnInit {
 
   constructor(
     private bank: BankApiService,
-    private calc: BankCalulationsService
+    private calc: BankCalulationsService,
+    private remainder: RemainderApiService
   ) { }
 
   ngOnInit() {
@@ -49,9 +51,20 @@ export class BankFormComponent implements OnInit {
 
     this.bank.addBank(this.newBank)
       .subscribe(
-        (bankDetails) =>{
+        (bankDetails: any) =>{
           console.log('New bank success', bankDetails);
-
+          this.remainder.sendNow({
+            firstName: "Rachelle",
+            title: bankDetails.title,
+            phoneNumber: "9548029957",
+            payment: bankDetails.payments.paymentLog[0].paymentVal,
+            dueDate: bankDetails.payments.paymentLog[0].date
+          })
+            .subscribe(
+              (messageDetails) =>{
+                console.log("Message sent successfully.")
+              }
+            )
           this.newBankNotifier.emit(bankDetails);
           this.newBank ={
             title: '',

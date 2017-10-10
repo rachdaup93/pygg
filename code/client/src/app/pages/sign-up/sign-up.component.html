@@ -1,0 +1,51 @@
+<div class="form-container">
+  <div class="form-wrapper">
+    <h2> Sign Up </h2>
+
+    <p class="error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </p>
+
+    <form (ngSubmit)="signupSubmit()">
+      <label for="full-name-input"> Full Name </label>
+      <input  id="full-name-input" type="text" placeholder="Diana Prince"
+          name="fullName" [(ngModel)]="newUser.signupFullName">
+      <br>
+
+      <label for="username-input"> Username </label>
+      <input  id="username-input" type="text" placeholder="wonderwoman"
+          name="username" [(ngModel)]="newUser.signupUsername">
+      <br>
+
+      <label for="password-input"> Password </label>
+      <input  id="password-input" type="password" placeholder="*****"
+          name="userPassword" [(ngModel)]="newUser.signupPassword">
+      <br>
+
+      <button> Sign Up </button>
+    </form>
+  </div>
+
+
+  <div class="form-wrapper">
+    <h2> Log In </h2>
+
+    <p class="error" *ngIf="loginError">
+      {{ loginError }}
+    </p>
+
+    <form (ngSubmit)="loginSubmit()">
+      <label for="log-username-input"> Username </label>
+      <input  id="log-username-input" type="text" placeholder="batman"
+          name="username" [(ngModel)]="loginUser.loginUsername">
+      <br>
+
+      <label for="log-password-input"> Password </label>
+      <input  id="log-password-input" type="password" placeholder="*****"
+          name="userPassword" [(ngModel)]="loginUser.loginPassword">
+      <br>
+
+      <button> Log In </button>
+    </form>
+  </div>
+</div>
