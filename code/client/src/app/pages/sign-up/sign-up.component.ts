@@ -17,29 +17,23 @@ export class SignUpComponent implements OnInit {
       signupUsername: '',
       signupPassword: ''
   };
-
-  loginUser: LoginInfo = {
-      loginUsername: '',
-      loginPassword: ''
-  };
-
   errorMessage: string;
   loginError: string;
 
   constructor(
-    private authThang: AuthApiService,
-    private routerThang: Router
+    private auth: AuthApiService,
+    private router: Router
   ) { }
 
   ngOnInit() {
   }
 
   signupSubmit() {
-      this.authThang.postSignup(this.newUser)
+      this.auth.postSignup(this.newUser)
         .subscribe(
           // if success, go to a different component
           (userInfo) => {
-              this.routerThang.navigate(['']);
+              this.router.navigate(['']);
           },
 
           // if error, display the error
@@ -54,26 +48,4 @@ export class SignUpComponent implements OnInit {
           }
         ); // .subscribe()
   } // signupSubmit()
-
-  loginSubmit() {
-      this.authThang.postLogin(this.loginUser)
-        .subscribe(
-          // if success, redirect home
-          (userInfo) => {
-              this.routerThang.navigate(['']);
-          },
-
-          // if error, show feedback
-          (errInfo) => {
-              console.log('Log in error', errInfo);
-              if (errInfo.status === 401) {
-                  this.loginError = 'Bad credentials.';
-              }
-              else {
-                  this.loginError = 'Something went wrong. Try again later.';
-              }
-          }
-        ); // .subscribe()
-  } // loginSubmit()
-
 }

@@ -17,6 +17,12 @@ export class BankApiService {
       this.baseUrl + '/api/banks'
     );}
 
+  getBankDetails(bankId: string) {
+        return this.http.get(
+          this.baseUrl + '/api/banks/' + bankId
+        );
+    }
+
   addBank(bankObject: BankInfo){
     return this.http.post(
       this.baseUrl + '/api/banks',

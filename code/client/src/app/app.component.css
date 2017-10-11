@@ -1,0 +1,71 @@
+.container-nav{
+  height: 100vh;
+}
+
+.mat-drawer-content{
+  overflow: none !important;
+}
+nav{
+  padding: 0 20px;
+  position: absolute;
+}
+
+.sidenav {
+  padding: 0 20px;
+  width: 250px;
+  overflow-x: hidden;
+}
+
+.sidenav a{
+  display: block;
+  color: #ff1744;
+  text-align: center;
+  padding: 30px;
+}
+
+#close-menu{
+  position: relative;
+  display: inline-block;
+  left: 149px;
+  bottom:33px;
+  font-size: 2rem;
+}
+
+#menu{
+  display: inline-flex;
+  align-items: center;
+  height: inherit;
+}
+
+.material-icons{
+  display: inline;
+}
+#menu .material-icons{
+  font-size: 4em;
+}
+
+#user{
+  height: 64px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+}
+
+.fixed-nav{
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fixed-nav a{
+  color: #FFFFFF;
+}
+#log-out{
+  display: inline-flex;
+  color: #000000;
+  text-align: center;
+  padding: 30px;
+  align-items: center;
+}

@@ -7,7 +7,7 @@ const bankSchema = new Schema({
   date: { type: Date, required: true },
   dateFormatted: { type: String, required: true },
   payments: {
-    // owner:{},
+    ownerId:{ type: Schema.Types.ObjectId, required: true},
     startDate: { type: Date, required: true },
     remainingCost: { type: Number, required: true },
     period: { type: String, required: true },

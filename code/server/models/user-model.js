@@ -6,31 +6,27 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema(
   {
-    email: {
-      type: String,
-      required: true
-    },
+      fullName: {
+          type: String,
+          required: [true, 'Please give us your name.']
+      },
+      username: {
+          type: String,
+          required: [true, 'Username is required.']
+      },
+      encryptedPassword: {
+          type: String,
+          required: [true, 'Password is required.']
+      },
 
-    // for users who did normal login with email and password
-    encryptedPassword: { type: String },
+          // for Facebook login users
+      facebookID: { type: String },
 
-    // for Facebook login users
-    facebookID: { type: String },
-
-    googleID: { type: String },
-
-    // determines whether you are an admin or not
-    role: {
-      type: String,
-      enum: [ 'normal', 'admin' ],
-      default: 'normal'
-    }
+      googleID: { type: String },
   },
 
-  // optional settings object for this schema
   {
-    // adds "createdAt" and "updatedAt" fields to the schema
-    timestamps: true
+      timestamps: true
   }
 );
 

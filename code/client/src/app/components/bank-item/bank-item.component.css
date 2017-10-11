@@ -1,0 +1,14 @@
+.card{
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.card img{
+  display: block;
+  width: 70%;
+  margin: 0 auto;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BankApiService } from '../../services/bank-api.service';
 import { BankCalulationsService } from '../../services/bank-calulations.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'bank-item',
@@ -27,6 +28,9 @@ export class BankItemComponent implements OnInit {
       (bank: any) =>{
         this.bankItem = bank;
       })
+    this.bankItem.paymentLog.forEach((log)=>{
+       log = moment().format("dddd, MMMM Do YYYY");
+    })
   }
 
 }

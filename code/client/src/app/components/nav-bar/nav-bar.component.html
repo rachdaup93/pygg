@@ -1,7 +1,5 @@
-<!-- <a id="log-out" class="waves-effect waves-light grey lighten-5 btn" (click)="logMeOut()">LOG OUT</a>
-<router-outlet></router-outlet> -->
-<mat-sidenav-container class="container-nav">
 <div *ngIf="!userInfo">
+<mat-sidenav-container class="container-nav">
   <mat-sidenav #sidenav class="sidenav">
     <a id="close-menu" (click)="sidenav.close()"><i class="small material-icons">close</i></a>
     <a [routerLink]="['']">HOME</a>
@@ -14,8 +12,11 @@
       <li><a [routerLink]="['login']">LOG IN</a></li>
     </ul>
 </nav>
+
 </header>
+</mat-sidenav-container>
 </div>
+
 <div *ngIf="userInfo">
   <header>
     <nav class="nav-wrapper grey darken-4">
@@ -30,6 +31,5 @@
     <a href="">Dashboard</a>
     <a href="">Pyggie Banks</a>
   </div>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
-</mat-sidenav-container>

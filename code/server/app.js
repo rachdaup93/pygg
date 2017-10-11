@@ -10,10 +10,10 @@ const session      = require('express-session');
 const passport     = require('passport');
 const flash        = require('connect-flash');
 const cors         = require('cors');
+const scheduler    = require('./scheduler');
 
 // Load environment variables from ".env" file (put this at the top)
 require('dotenv').config();
-
 
 // Run all the setup code inside "passport-config.js"
 // (that file doesn't export anything)
@@ -23,6 +23,7 @@ require('./config/passport-config.js');
 mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
+app.locals.moment = require('moment');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -82,11 +83,14 @@ app.use((req, res, next) => {
 // const index = require('./routes/index');
 // app.use('/', index);
 
-// const myAuthRoutes = require('./routes/auth-api-router.js');
-// app.use(myAuthRoutes);
+const myAuthRoutes = require('./routes/auth-api-router.js');
+app.use('/api', myAuthRoutes);
 
 const bankRoutes = require('./routes/bank-api-router.js');
 app.use('/api', bankRoutes);
+
+const remainderRoutes = require('./routes/remainder-api-router.js');
+app.use('/api', remainderRoutes);
 
 // END ROUTES -------------------------------------------------------
 

@@ -8,3 +8,8 @@
   margin: 0;
   text-align: center;
 }
+
+.form-container{
+  height: 410px;
+  margin-left: 100px;
+}

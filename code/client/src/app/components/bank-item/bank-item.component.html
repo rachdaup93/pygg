@@ -1,9 +1,17 @@
-<h2>{{ bankItem.title }}</h2>
-<p> ${{ bankItem.totalValue.toFixed(2) }}</p>
-<p> Goal Date: {{ bankItem.dateFormatted }}</p>
-<p> Remaining Balance: ${{ bankItem.payments.remainingCost.toFixed(2)}}</p>
-<p> Number Of Payments Left: {{ bankItem.payments.numberPaymentsLeft}}</p>
-<div *ngIf="bankItem.payments.paymentLog.length > 0">
-  <p> Next Payment: ${{ bankItem.payments.paymentLog[0].paymentVal.toFixed(2) }} on {{ bankItem.payments.paymentLog[0].date }}</p>
-  <button (click)="payNow()">Pay Now</button>
-</div>
+<div class="card white">
+  <div class="col m6">
+    <span class="card-title">{{ bankItem.title }}</span>
+    <div *ngIf="bankItem.payments.paymentLog.length > 0">
+      <p> Next Payment Due</p>
+      <p>${{ bankItem.payments.paymentLog[0].paymentVal.toFixed(2) }}</p> <p>{{ bankItem.payments.paymentLog[0].date }}</p>
+      <button class="waves-effect waves-light teal darken-2 btn" (click)="payNow()">Pay Now</button>
+    </div>
+    <div *ngIf="bankItem.payments.paymentLog.length === 0">
+      <h4>COMPLETED</h4>
+    </div>
+  </div>
+    <div class="col m6">
+      <img src="../../../assets/images/bankicon.svg" alt="">
+      <h5>${{ bankItem.payments.remainingCost.toFixed(2)}}</h5>
+    </div>
+  </div>

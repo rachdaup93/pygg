@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BankApiService } from './services/bank-api.service';
 import { RemainderApiService } from './services/remainder-api.service';
 import { BankCalulationsService } from './services/bank-calulations.service';
+import { AuthApiService } from './services/auth-api.service';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 // import { AuthApiService } from './services/auth-api.service';
@@ -16,7 +17,13 @@ import { BankListComponent } from './pages/bank-list/bank-list.component';
 import { BankFormComponent } from './components/bank-form/bank-form.component';
 import { BankItemComponent } from './components/bank-item/bank-item.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
+import { LogInComponent } from './pages/log-in/log-in.component';
+import { BankDetailsComponent } from './pages/bank-details/bank-details.component';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,18 +33,25 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
     NotFoundComponent,
     BankItemComponent,
     HomePageComponent,
-    SignUpComponent
+    SignUpComponent,
+    UserPageComponent,
+    LogInComponent,
+    NavBarComponent,
+    BankDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSidenavModule
   ],
   providers: [
     BankApiService,
     BankCalulationsService,
-    RemainderApiService
+    RemainderApiService,
+    AuthApiService
   ],
   bootstrap: [AppComponent]
 })
