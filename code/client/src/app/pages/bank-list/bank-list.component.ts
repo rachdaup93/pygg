@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BankApiService } from '../../services/bank-api.service';
+import { BanklistService } from '../../services/banklist.service';
 
 @Component({
   selector: 'app-bank-list',
@@ -9,17 +10,10 @@ import { BankApiService } from '../../services/bank-api.service';
 export class BankListComponent implements OnInit {
   banks: any[]  = [];
   constructor(
-    private bank: BankApiService
+    private bankList: BanklistService
   ) { }
 
   ngOnInit() {
-    this.bank.getBanks()
-      .subscribe(
-        (banksFromApi: any[]) =>{
-          this.banks = banksFromApi;
-        })
-  }
-  addBankToList(newBank){
-    this.banks.unshift(newBank);
+    this.banks = this.bankList.openBanks
   }
 }

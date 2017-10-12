@@ -16,10 +16,11 @@ import * as moment from 'moment'
 })
 export class BankDetailsComponent implements OnInit {
 
-    imageDomain = environment.apiUrl;
-
-    bankInfo: any = {};
-    userInfo: any;
+  bankInfo: any;
+  bankFormInfo: any;
+  userInfo: any;
+  isFormOn: boolean = false;
+  errorMessage: string;
 
     constructor(
       private activated: ActivatedRoute,
@@ -29,32 +30,49 @@ export class BankDetailsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.activated.params.subscribe((myParams) => {
-                                  // { path: 'phone/:phoneId'
-            this.bank.getBankDetails(myParams.bankId)
-              .subscribe(
-                (bankFromApi) => {
-                    this.bankInfo = bankFromApi;
-                }
-              );
-        });
+      this.activated.params.subscribe((myParams) => {
+                                // { path: 'phone/:phoneId'
+          this.bank.getBankDetails(myParams.bankId)
+            .subscribe(
+              (bankFromApi) => {
+                  this.bankInfo = bankFromApi;
+                  this.bankFormInfo = bankFromApi;
+                  this.bankFormInfo.date =
+                  moment(this.bankInfo.date).format("YYYY-MM-DD");
+                  this.bankFormInfo.payments.startDate =
+                  moment(this.bankInfo.payments.startDate).format("YYYY-MM-DD");
+              }
+            );
+      });
 
-        this.auth.getLoginStatus()
-          .subscribe(
-            (loggedInInfo: any) => {
-                if (loggedInInfo.isLoggedIn) {
-                    this.userInfo = loggedInInfo.userInfo;
-                }
+    this.auth.getLoginStatus()
+      .subscribe(
+        (loggedInInfo: any) => {
+            if (loggedInInfo.isLoggedIn) {
+                this.userInfo = loggedInInfo.userInfo;
             }
-          );
-    } // ngOnInit()
+        }
+      );
+    }
+
+    showForm() {
+      // PRO WAY
+      // this.isFormOn = !this.isFormOn;
+
+      if (this.isFormOn) {
+          this.isFormOn = false;
+      }
+      else {
+          this.isFormOn = true;
+      }
+  }
+     // ngOnInit()
 
     deleteClick() {
-        // call the API for deletion
         this.bank.deleteBank(this.bankInfo._id)
           .subscribe(
             () => {
-                this.router.navigate(['']);
+                this.router.navigate(['profile']);
             }
           );
     }

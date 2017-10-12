@@ -42,7 +42,6 @@ router.post('/remainders/newBankNotifier', function(req, res, next) {
           console.error(err);
       } else {
           // Log the last few digits of a phone number
-          console.log(response)
           res.status(200).json({SuccessMessage: "Yay!"})
       }
   });

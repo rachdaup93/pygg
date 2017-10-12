@@ -14,7 +14,8 @@ export class BankApiService {
 
   getBanks(){
     return this.http.get(
-      this.baseUrl + '/api/banks'
+      this.baseUrl + '/api/banks',
+      { withCredentials: true }
     );}
 
   getBankDetails(bankId: string) {
@@ -26,7 +27,8 @@ export class BankApiService {
   addBank(bankObject: BankInfo){
     return this.http.post(
       this.baseUrl + '/api/banks',
-      bankObject
+      bankObject,
+      { withCredentials: true }
     );}
 
   editBank(bankObject){
@@ -34,6 +36,12 @@ export class BankApiService {
     return this.http.put(
       this.baseUrl + '/api/banks/' + id,
       bankObject
+    );}
+
+  deleteBank(bankId){
+    return this.http.delete(
+      this.baseUrl + '/api/banks/' + bankId,
+      { withCredentials: true }
     );
   }
 }

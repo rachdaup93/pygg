@@ -48,7 +48,6 @@ export class AuthApiService {
             { withCredentials: true }
         ) // need "withCredentials" for APIs that use the session
         .do((loggedInInfo) => {
-          console.log(loggedInInfo);
             this.loginStatusSubject.next(loggedInInfo);
         })
       ); // return (

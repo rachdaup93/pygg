@@ -6,8 +6,8 @@ const bankSchema = new Schema({
   totalValue: { type: Number, required: true },
   date: { type: Date, required: true },
   dateFormatted: { type: String, required: true },
+  ownerId:{ type: Schema.Types.ObjectId, required: true},
   payments: {
-    ownerId:{ type: Schema.Types.ObjectId, required: true},
     startDate: { type: Date, required: true },
     remainingCost: { type: Number, required: true },
     period: { type: String, required: true },
@@ -15,7 +15,7 @@ const bankSchema = new Schema({
     paymentLog:[]
   },
   description: { type: String },
-  // private: {type: Boolean}
+  completed: { type: Boolean, required: true, default: false }
   });
 
 const bankModel = mongoose.model('Bank', bankSchema);

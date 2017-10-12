@@ -11,7 +11,9 @@
     </div>
   </div>
     <div class="col m6">
-      <img src="../../../assets/images/bankicon.svg" alt="">
+      <a [routerLink]="['/mybanks', bankItem._id]">
+        <img src="../../../assets/images/bankicon.svg" alt="">
+      </a>
       <h5>${{ bankItem.payments.remainingCost.toFixed(2)}}</h5>
     </div>
   </div>

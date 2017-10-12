@@ -1,0 +1,52 @@
+.main{
+  margin: 0;
+  padding-top: 64px;
+  padding-left: 260px;
+  min-height: 100vh;
+}
+
+#details{
+  text-align: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5{
+  margin: 10px;
+}
+
+.card-content h2{
+  font-weight: 300;
+}
+#form-section{
+  position: relative;
+}
+#buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#buttons img{
+  width: 100%;
+}
+
+#buttons > button{
+  height: 60px;
+  width: 162px;
+  margin: 5px;
+}
+
+#buttons > .teal{
+  margin-top: -285px;
+}
+
+#form-card{
+  width: 90%;
+  position: absolute;
+  z-index: 30;
+  box-sizing: border-box;
+}

@@ -2,25 +2,30 @@
 <div class="form-container">
   <div class="form-wrapper">
     <h2> Sign Up </h2>
-    <p class="error" *ngIf="loginError">
-      {{ loginError }}
+    <p class="error" *ngIf="signupError">
+      {{ signupError }}
     </p>
 
-    <form class="container" (ngSubmit)="signupSubmit()">
+    <form class="container" (ngSubmit)="signupSubmit()" novalidate>
       <div class="input-field col s12">
-        <input  id="full-name-input" type="text"
+        <input  id="full-name-input" type="text" required
             name="fullName" [(ngModel)]="newUser.signupFullName">
         <label for="full-name-input"> Full Name </label>
       </div>
       <div class="input-field col s12">
-      <input  id="username-input" type="text"
+      <input  id="username-input" type="text" required
             name="username" [(ngModel)]="newUser.signupUsername">
-      <label for="log-username-input"> Username </label>
+      <label for="username-input"> Username </label>
       </div>
       <div class="input-field col s12">
-        <input  id="password-input" type="password"
-            name="userPassword" [(ngModel)]="newUser.signupPassword">
-      <label for="log-password-input"> Password </label>
+      <input  id="phone-input" type="number" required
+            name="phone" [(ngModel)]="newUser.signupPhone">
+      <label for="phone-input"> Mobile Number </label>
+      </div>
+      <div class="input-field col s12">
+        <input  id="password-input" type="password" required
+            name="password" [(ngModel)]="newUser.signupPassword">
+      <label for="password-input"> Password </label>
       </div>
       <button class="waves-effect waves-light teal darken-2 btn"> Sign Up </button>
     </form>

@@ -1,4 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component,
+        OnInit,
+        Output,
+        EventEmitter,
+        AfterViewInit
+        } from '@angular/core';
 
 import { BankInfo } from '../../interfaces/bank-info';
 import { BankApiService } from '../../services/bank-api.service';
@@ -8,16 +13,17 @@ import { environment } from '../../../environments/environment';
 
 import * as moment from 'moment'
 
+declare var $:any;
 @Component({
   selector: 'app-bank-form',
   templateUrl: './bank-form.component.html',
   styleUrls: ['./bank-form.component.css']
 })
-export class BankFormComponent implements OnInit {
+export class BankFormComponent implements OnInit, AfterViewInit {
 
   newBank: BankInfo ={
     title: '',
-    totalValue: 0,
+    totalValue: null,
     date: null,
     dateFormatted: '',
     payments: {
@@ -41,18 +47,20 @@ export class BankFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngAfterViewInit(){
+    $('select').material_select();
+  }
+
   newBankObject(){
     this.newBank.payments.remainingCost = this.newBank.totalValue;
     this.newBank.dateFormatted = moment(this.newBank.date).format("dddd, MMMM Do YYYY");
     this.newBank.payments.paymentLog = this.calc.numberPeriod(this.newBank);
     this.newBank.payments.numberPaymentsLeft = this.newBank.payments.paymentLog.length;
 
-    // console.log(this.calc.timeSpan(this.newBank.deadline));
 
     this.bank.addBank(this.newBank)
       .subscribe(
         (bankDetails: any) =>{
-          console.log('New bank success', bankDetails);
           this.remainder.sendNow({
             firstName: "Rachelle",
             title: bankDetails.title,
@@ -68,7 +76,7 @@ export class BankFormComponent implements OnInit {
           this.newBankNotifier.emit(bankDetails);
           this.newBank ={
             title: '',
-            totalValue: 0,
+            totalValue: null,
             date: null,
             dateFormatted: '',
             payments: {

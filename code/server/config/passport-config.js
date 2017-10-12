@@ -90,7 +90,6 @@ passport.use(
     // gets called after a SUCCESSFUL Facebook login
     (accessToken, refreshToken, profile, done) => {
         console.log('Facebook user info:');
-        console.log(profile);
 
         // check to see if it's the first time they log in
         UserModel.findOne(

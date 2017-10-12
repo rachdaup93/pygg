@@ -15,10 +15,11 @@ export class SignUpComponent implements OnInit {
   newUser: SignupInfo = {
       signupFullName: '',
       signupUsername: '',
-      signupPassword: ''
+      signupPassword: '',
+      signupPhone:    null
   };
   errorMessage: string;
-  loginError: string;
+  signupError: string;
 
   constructor(
     private auth: AuthApiService,
@@ -33,7 +34,7 @@ export class SignUpComponent implements OnInit {
         .subscribe(
           // if success, go to a different component
           (userInfo) => {
-              this.router.navigate(['']);
+              this.router.navigate(['profile']);
           },
 
           // if error, display the error

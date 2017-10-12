@@ -1,38 +1,38 @@
-<h3> Add a Bank</h3>
-
 <p class="error" *ngIf="errorMessage">
   {{ errorMessage }}
 </p>
 
-<form name="myForm" (ngSubmit)="newBankObject()" novalidate>
-  <label for="bank-title-input"> Title </label>
-  <input  id="bank-title-input" type="text" placeholder="ibank 8 Plus"
+<form name="myForm" class="container" (ngSubmit)="newBankObject()" novalidate>
+  <div class="input-field col s12">
+    <input  id="bank-title-input" type="text"
       name="bankTitle" [(ngModel)]="newBank.title">
-  <br>
-
-  <label for="bank-value-input"> Savings Amount </label>
-  <input  id="bank-value-input" type="number" placeholder="Apple"
+  <label for="bank-title-input"> Title </label>
+  </div>
+  <div class="input-field col s12">
+    <input  id="bank-value-input" type="number"
       name="bankValue" [(ngModel)]="newBank.totalValue">
-  <br>
-
+    <label for="bank-value-input"> Savings Amount </label>
+  </div>
   <label for="bank-goalDate-input"> Pyggie Bank Goal Date </label>
-  <input  id="bank-goalDate-input" type="date"
+  <input  id="bank-goalDate-input" class="unstyled" type="date" required
       name="bankGoalDate"  [(ngModel)]="newBank.date">
-  <br>
-  <!-- <img [src]="newBank.bankImage"> -->
-  <h3>Payment Plan</h3>
+
+  <h5>Payment Plan</h5>
   <label for="bank-startDate-input"> Payment Start Date </label>
-  <input class="unstyled" #bankStartDate="ngModel" type="date" required max={{newBank.date}}
+    <input #bankStartDate="ngModel" class="unstyled" type="date" required max={{newBank.date}}
       name="bankStartDate"  [(ngModel)]="newBank.payments.startDate">
-  <br>
-  <label for="bank-period-input">How often will you pay?</label>
-          <select class="form-control" id="bank-period-input" name="bankPeriod" [(ngModel)]='newBank.payments.period'>
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="bi-weekly">BiWeekly</option>
-            <option value="monthly">Monthly</option>
-          </select>
-  <button> Save This bank </button>
+      <div class="input-field col s8">
+    <select id="bank-period-input" name="bankPeriod" [(ngModel)]='newBank.payments.period'>
+      <option value="daily">Daily</option>
+      <option value="weekly">Weekly</option>
+      <option value="bi-weekly">BiWeekly</option>
+      <option value="monthly">Monthly</option>
+    </select>
+    <label for="bank-period-input">How often will you pay?</label>
+  </div>
+  <div class="col s12">
+    <button class="waves-effect waves-light teal darken-2 btn"> Save This bank </button>
+  </div>
 </form>
 <div *ngIf="bankStartDate.dirty && newBank.payments.startDate > newBank.date">
   <p> start date must be before the goal date</p>

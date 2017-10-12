@@ -1,0 +1,37 @@
+<p class="error" *ngIf="errorMessage">
+  {{ errorMessage }}
+</p>
+
+<form name="myForm" (ngSubmit)="bankInfoObject()" novalidate>
+  <label for="bank-title-input"> Title </label>
+  <input  id="bank-title-input" type="text" placeholder="ibank 8 Plus"
+      name="bankTitle" [(ngModel)]="bankInfo.title">
+  <br>
+
+  <label for="bank-value-input"> Savings Amount </label>
+  <input  id="bank-value-input" type="number" placeholder="Apple"
+      name="bankValue" [(ngModel)]="bankInfo.totalValue">
+  <br>
+
+  <label for="bank-goalDate-input"> Pyggie Bank Goal Date </label>
+  <input  id="bank-goalDate-input" type="date"
+      name="bankGoalDate"  [(ngModel)]="bankInfo.date">
+  <br>
+
+  <h5>Payment Plan</h5>
+  <label for="bank-startDate-input"> Payment Start Date </label>
+  <input class="unstyled" #bankStartDate="ngModel" type="date" required max={{bankInfo.date}}
+      name="bankStartDate"  [(ngModel)]="bankInfo.payments.startDate">
+  <br>
+  <label for="bank-period-input">How often will you pay?</label>
+          <select class="form-control" id="bank-period-input" name="bankPeriod" [(ngModel)]='bankInfo.payments.period'>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="bi-weekly">BiWeekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+  <button class="waves-effect waves-light teal darken-2 btn"> Save This bank </button>
+</form>
+<div *ngIf="bankStartDate.dirty && bankInfo.payments.startDate > bankInfo.date">
+  <p> start date must be before the goal date</p>
+</div>

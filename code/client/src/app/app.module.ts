@@ -7,6 +7,7 @@ import { BankApiService } from './services/bank-api.service';
 import { RemainderApiService } from './services/remainder-api.service';
 import { BankCalulationsService } from './services/bank-calulations.service';
 import { AuthApiService } from './services/auth-api.service';
+import { BanklistService } from './services/banklist.service';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 // import { AuthApiService } from './services/auth-api.service';
@@ -21,9 +22,8 @@ import { UserPageComponent } from './pages/user-page/user-page.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { BankDetailsComponent } from './pages/bank-details/bank-details.component';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSidenavModule} from '@angular/material';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { BankEditComponent } from './components/bank-edit/bank-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,21 +37,21 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
     UserPageComponent,
     LogInComponent,
     NavBarComponent,
-    BankDetailsComponent
+    BankDetailsComponent,
+    BankEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatSidenavModule
+    HttpClientModule
   ],
   providers: [
     BankApiService,
     BankCalulationsService,
     RemainderApiService,
-    AuthApiService
+    AuthApiService,
+    BanklistService
   ],
   bootstrap: [AppComponent]
 })

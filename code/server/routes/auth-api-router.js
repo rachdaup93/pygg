@@ -9,11 +9,12 @@ const router = express.Router();
 
 
 router.post('/process-signup', (req, res, next) => {
-    if (!req.body.signupFullName ||
+    if (!req.body.signupFullName   ||
           !req.body.signupUsername ||
-          !req.body.signupPassword) {
+          !req.body.signupPassword ||
+          !req.body.signupPhone) {
         res.status(400).json(
-          { errorMessage: 'We need full name, username and password.' }
+          { errorMessage: 'We need full name, username, password, and a mobile number.' }
         );
         return;
     }
@@ -38,6 +39,7 @@ router.post('/process-signup', (req, res, next) => {
           const theUser = new UserModel({
               fullName: req.body.signupFullName,
               username: req.body.signupUsername,
+              phoneNumber: req.body.signupPhone,
               encryptedPassword: hashPass
           });
 
@@ -70,7 +72,7 @@ router.post('/process-login', (req, res, next) => {
     const customAuthCallback =
       passport.authenticate('local', (err, theUser, extraInfo) => {
           if (err) {
-              res.status(500).json({ errorMessage: 'Login failed. 💩' });
+              res.status(500).json({ errorMessage: 'Login failed.' });
               return;
           }
 
@@ -81,7 +83,7 @@ router.post('/process-login', (req, res, next) => {
 
           req.login(theUser, (err) => {
               if (err) {
-                  res.status(500).json({ errorMessage: 'Login failed. 👽' });
+                  res.status(500).json({ errorMessage: 'Login failed.' });
                   return;
               }
 
@@ -97,7 +99,7 @@ router.post('/process-login', (req, res, next) => {
 router.delete('/logout', (req, res, next) => {
     // "req.logout" is defined by Passport
     req.logout();
-    res.status(200).json({ successMessage: 'Log out success! 🤣' });
+    res.status(200).json({ successMessage: 'Log out success!' });
 });
 
 router.get('/checklogin', (req, res, next) => {
@@ -159,13 +161,5 @@ passport.authenticate('google', (err, theUser, extraInfo) => {
           });
       }),
 );
-
-// router.get("/auth/google/callback",
-// passport.authenticate('google', {
-//   successRedirect: '/',
-//   failureRedirect: '/login',
-//   failureFlash: true
-// }),
-// );
 
 module.exports = router;

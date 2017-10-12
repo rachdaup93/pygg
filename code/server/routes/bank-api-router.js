@@ -4,7 +4,10 @@ const BankModel = require('../models/bank-model.js');
 const router = express.Router();
 
 router.get('/banks', (req, res, next)=>{
+  console.log(req.user._id)
+  const query = { ownerId: ObjectId(req.user._id) }
   BankModel.find(
+    query,
     (err, bankList)=>{
       if(err){
         return res.status(500).json({errorMessage: 'Could not obtain pyggie bank list.'})
@@ -15,11 +18,13 @@ router.get('/banks', (req, res, next)=>{
 })
 
 router.post('/banks', (req, res, next)=>{
+  console.log(req.user._id)
   const bank = new BankModel({
     title: req.body.title,
     totalValue: req.body.totalValue,
     date: req.body.date,
     dateFormatted: req.body.dateFormatted,
+    ownerId: req.user._id,
     payments: {
       startDate: req.body.payments.startDate,
       remainingCost: req.body.payments.remainingCost,
@@ -44,9 +49,22 @@ router.post('/banks', (req, res, next)=>{
   });
 })
 
-router.put('/banks/:id', (req, res, next)=>{
+router.get('/banks/:bankId', (req, res, next)=>{
   BankModel.findById(
-    req.params.id,
+    req.params.bankId,
+
+    (err, bank)=>{
+      if(err){
+        return res.status(500).json({errorMessage: 'Could not obtain pyggie bank.'})
+      }
+
+      res.status(200).json(bank);
+    });
+})
+
+router.put('/banks/:bankId', (req, res, next)=>{
+  BankModel.findById(
+    req.params.bankId,
     (err, bank)=>{
       if(err){
         return res.status(500).json({errorMessage: 'Could not obtain pyggie bank.'})
@@ -57,6 +75,7 @@ router.put('/banks/:id', (req, res, next)=>{
         date: req.body.date,
         dateFormatted: req.body.dateFormatted,
         payments: {
+          ownerId: req.user._id,
           startDate: req.body.payments.startDate,
           remainingCost: req.body.payments.remainingCost,
           period: req.body.payments.period,
@@ -83,5 +102,39 @@ router.put('/banks/:id', (req, res, next)=>{
     }
   );
 });
+
+router.delete('/banks/:bankId', (req, res, next) => {
+    if (!req.user) {
+        res.status(401).json({ errorMessage: 'Not logged in. 🥊' });
+        return;
+    }
+
+    BankModel.findById(
+      req.params.bankId,
+
+      (err, bankFromDb) => {
+          if (err) {
+              console.log('Bank owner confirm ERROR', err);
+              res.status(500).json(
+                { errorMessage: 'Bank owner confirm went wrong 💩' }
+              );
+              return;
+          }
+
+          BankModel.findByIdAndRemove(
+            req.params.bankId,
+            (err, bankFromDb) => {
+                if (err) {
+                    console.log('Bank delete ERROR', err);
+                    res.status(500).json({ errorMessage: 'Bank delete went wrong 💩' });
+                    return;
+                }
+
+                res.status(200).json(bankFromDb);
+            }
+          ); // BankModel.findByIdAndRemove()
+      }
+    ); // BankModel.findById()
+}); // DELETE /banks/:bankId
 
 module.exports = router;

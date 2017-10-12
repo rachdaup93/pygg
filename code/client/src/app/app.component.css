@@ -49,6 +49,8 @@ nav{
   min-width: 200px;
   display: flex;
   align-items: center;
+  font-size: 22px;
+  font-weight: 300;
 }
 
 .fixed-nav{

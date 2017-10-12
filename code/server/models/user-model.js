@@ -19,10 +19,10 @@ const userSchema = new Schema(
           required: [true, 'Password is required.']
       },
 
-          // for Facebook login users
-      facebookID: { type: String },
-
-      googleID: { type: String },
+      phoneNumber: {
+        type: Number,
+        required: [true, 'Phone Number is required.']
+      }
   },
 
   {
