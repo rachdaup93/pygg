@@ -1,10 +1,13 @@
 .main{
   margin: 0;
-  padding-top: 64px;
+  padding-top: 1px;
   padding-left: 260px;
   min-height: 100vh;
+  background-color: #EEEEEE;
 }
 
 #form-card{
-  height: 600px;
+  margin-top: -68px;
+  height: 550px;
+  margin-bottom: 0;
 }

@@ -6,7 +6,7 @@ const bankSchema = new Schema({
   totalValue: { type: Number, required: true },
   date: { type: Date, required: true },
   dateFormatted: { type: String, required: true },
-  ownerId:{ type: Schema.Types.ObjectId, required: true},
+  ownerId:{ type: Schema.Types.ObjectId, ref: 'User', required: true},
   payments: {
     startDate: { type: Date, required: true },
     remainingCost: { type: Number, required: true },
@@ -19,6 +19,6 @@ const bankSchema = new Schema({
   });
 
 const bankModel = mongoose.model('Bank', bankSchema);
-
+const UserModel = require('./user-model');
 
 module.exports = bankModel;

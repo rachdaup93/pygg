@@ -1,19 +1,22 @@
 <div class="card white">
-  <div class="col m6">
+  <div class="col m4">
+    <div class="icon">
+      <a [routerLink]="['/mybanks', bankItem._id]">
+        <img src="../../../assets/images/bankicon.svg" alt="">
+      </a>
+    </div>
+    <h5>${{ bankItem.payments.remainingCost.toFixed(2)}}</h5>
+    <p><strong>REMAINING</strong></p>
+  </div>
+  <div class="col m8">
     <span class="card-title">{{ bankItem.title }}</span>
     <div *ngIf="bankItem.payments.paymentLog.length > 0">
       <p> Next Payment Due</p>
-      <p>${{ bankItem.payments.paymentLog[0].paymentVal.toFixed(2) }}</p> <p>{{ bankItem.payments.paymentLog[0].date }}</p>
-      <button class="waves-effect waves-light teal darken-2 btn" (click)="payNow()">Pay Now</button>
+      <p><strong>${{ bankItem.payments.paymentLog[0].paymentVal.toFixed(2) }}</strong></p> <p>{{ bankItem.payments.paymentLog[0].date }}</p>
+      <button class="waves-effect waves-light teal darken-2 btn" (click)="payNow()">I Saved!</button>
     </div>
     <div *ngIf="bankItem.payments.paymentLog.length === 0">
       <h4>COMPLETED</h4>
     </div>
   </div>
-    <div class="col m6">
-      <a [routerLink]="['/mybanks', bankItem._id]">
-        <img src="../../../assets/images/bankicon.svg" alt="">
-      </a>
-      <h5>${{ bankItem.payments.remainingCost.toFixed(2)}}</h5>
-    </div>
   </div>

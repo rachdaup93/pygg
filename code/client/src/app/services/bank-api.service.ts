@@ -32,10 +32,12 @@ export class BankApiService {
     );}
 
   editBank(bankObject){
+    console.log(bankObject)
     let id = bankObject._id;
     return this.http.put(
       this.baseUrl + '/api/banks/' + id,
-      bankObject
+      bankObject,
+      { withCredentials: true }
     );}
 
   deleteBank(bankId){

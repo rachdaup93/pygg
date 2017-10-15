@@ -1,4 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component,
+         OnInit,
+         Input,
+         Output,
+         EventEmitter} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthApiService } from '../../services/auth-api.service';
 import { BankApiService } from '../../services/bank-api.service';
@@ -21,20 +25,20 @@ export class UserPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.auth.getLoginStatus()
+    .subscribe(
+      (loggedInInfo: any) => {
+        if (loggedInInfo.isLoggedIn) {
+          this.userInfo = loggedInInfo.userInfo;
+        }
+      }
+    );
     this.bank.getBanks()
       .subscribe(
         (banksFromApi: any[]) =>{
           this.banks = banksFromApi;
-          console.log(this.banks)
-        })
-    this.auth.getLoginStatus()
-        .subscribe(
-          (loggedInInfo: any) => {
-              if (loggedInInfo.isLoggedIn) {
-                  this.userInfo = loggedInInfo.userInfo;
-              }
-          }
-        );
+          this.bankList.openBanks = banksFromApi;
+        });
   }
 
   showForm() {
@@ -47,5 +51,8 @@ export class UserPageComponent implements OnInit {
     else {
         this.isFormOn = true;
     }
-}
+  }
+  addBank(bankObject){
+    this.banks.push(bankObject);
+  }
 }

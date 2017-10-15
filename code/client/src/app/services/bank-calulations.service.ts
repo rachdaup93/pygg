@@ -26,7 +26,7 @@ export class BankCalulationsService {
   logOfPayments(bank, increment, type){
     let period = moment(bank.payments.startDate);
     let paymentLog = [];
-    while(period.isBefore(bank.date)){
+    while(period.isSameOrBefore(bank.date)){
       paymentLog.push({
         date: period.format("dddd, MMMM Do YYYY")
       })

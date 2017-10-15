@@ -24,6 +24,7 @@ router.get('/remainders', function(req, res, next) {
 
 // GET: /remainders/create
 router.post('/remainders/newBankNotifier', function(req, res, next) {
+  console.log("test")
   const client = new Twilio(cfg.twilioAccountSid, cfg.twilioAuthToken);
   // Create options to send the message
   const options = {

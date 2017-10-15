@@ -14,16 +14,16 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BankListComponent } from './pages/bank-list/bank-list.component';
+import { BankListComponent } from './components/bank-list/bank-list.component';
 import { BankFormComponent } from './components/bank-form/bank-form.component';
 import { BankItemComponent } from './components/bank-item/bank-item.component';
+import { BankEditComponent } from './components/bank-edit/bank-edit.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
 import { LogInComponent } from './pages/log-in/log-in.component';
 import { BankDetailsComponent } from './pages/bank-details/bank-details.component';
 
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
-import { BankEditComponent } from './components/bank-edit/bank-edit.component';
 
 @NgModule({
   declarations: [

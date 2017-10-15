@@ -118,48 +118,4 @@ router.get('/checklogin', (req, res, next) => {
     );
 });
 
-// link to "/auth/facebook" to take the user to the Facebook Website for login
-router.get('/auth/facebook', passport.authenticate('facebook'));
-// the "/auth/facebook/callback" URL is where the user will arrive after login
-router.get('/auth/facebook/callback',
-            // name of strategy    settings object
-            //               |      |
-  passport.authenticate('facebook', {
-      successRedirect: '/',
-      failureRedirect: '/login',
-      failureFlash: true
-  })
-);
-
-router.get("/auth/google", passport.authenticate("google", {
-  scope: ["https://www.googleapis.com/auth/plus.login",
-          "https://www.googleapis.com/auth/plus.profile.emails.read",
-          "https://www.googleapis.com/auth/calendar"]
-}));
-
-router.get("/auth/google/callback",
-passport.authenticate('google', (err, theUser, extraInfo) => {
-          if (err) {
-              res.status(500).json({ errorMessage: 'Login failed. 💩' });
-              return;
-          }
-
-          if (!theUser) {
-              res.status(401).json({ errorMessage: extraInfo.message });
-              return;
-          }
-
-          req.login(theUser, (err) => {
-              if (err) {
-                  res.status(500).json({ errorMessage: 'Login failed. 👽' });
-                  return;
-              }
-
-              // clear out the password before sending the user info
-              theUser.encryptedPassword = undefined;
-              res.status(200).json(theUser);
-          });
-      }),
-);
-
 module.exports = router;

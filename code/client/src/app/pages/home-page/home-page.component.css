@@ -1,21 +1,61 @@
 .main{
   display: flex;
-  background: url("../../../assets/images/pig-bg.jpg") no-repeat center center fixed;
+  background:
+  linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+  url("../../../assets/images/public-bg.jpg");
   background-size: cover;
   height: 100vh;
   align-items: center;
   justify-content:flex-start;
   margin: 0;
   text-align: center;
+  color: white;
 }
 #content{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  margin-left: 10%;
+  margin: 0 auto;
+  width: 60%;
 }
 h1{
+  font-size: 8.5rem;
   margin: 0;
+  font-weight: 500;
+  letter-spacing: 28px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding-left: 28px;
+}
+
+h2{
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+#icon{
+  display: inline-flex;
+  align-items: center;
+  margin-right: 8px;
+  justify-content: center;
+  background-color: #ffeb3b;
+  border-radius: 50%;
+  color: black;
+}
+
+#signup{
+  width: 300px;
+  height: 70px;
+  font-size: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
 }

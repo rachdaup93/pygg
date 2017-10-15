@@ -15,7 +15,6 @@ import * as moment from 'moment';
 export class BankEditComponent implements OnInit {
   @Input() bankInfo: any;
   userInfo: any;
-  bankFormInfo: any;
   date: any;
   startDate: any;
 
@@ -28,11 +27,12 @@ export class BankEditComponent implements OnInit {
 
     ngOnInit() {
     }
-  formatDate(){
-
-  }
 
   bankInfoObject(){
-    
+    this.bank.editBank(this.bankInfo)
+      .subscribe(
+        (bankDetails: any) =>{
+          console.log('Successful update')
+    });
   }
 }

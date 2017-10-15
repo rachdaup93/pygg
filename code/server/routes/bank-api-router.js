@@ -4,10 +4,9 @@ const BankModel = require('../models/bank-model.js');
 const router = express.Router();
 
 router.get('/banks', (req, res, next)=>{
-  console.log(req.user._id)
-  const query = { ownerId: ObjectId(req.user._id) }
+
   BankModel.find(
-    query,
+    { ownerId: req.user._id},
     (err, bankList)=>{
       if(err){
         return res.status(500).json({errorMessage: 'Could not obtain pyggie bank list.'})

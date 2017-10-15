@@ -1,3 +1,4 @@
+<h5>New Bank</h5>
 <p class="error" *ngIf="errorMessage">
   {{ errorMessage }}
 </p>
@@ -16,8 +17,6 @@
   <label for="bank-goalDate-input"> Pyggie Bank Goal Date </label>
   <input  id="bank-goalDate-input" class="unstyled" type="date" required
       name="bankGoalDate"  [(ngModel)]="newBank.date">
-
-  <h5>Payment Plan</h5>
   <label for="bank-startDate-input"> Payment Start Date </label>
     <input #bankStartDate="ngModel" class="unstyled" type="date" required max={{newBank.date}}
       name="bankStartDate"  [(ngModel)]="newBank.payments.startDate">

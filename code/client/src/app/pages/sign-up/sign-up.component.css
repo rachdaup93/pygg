@@ -1,10 +1,34 @@
 .main{
   display: flex;
-  background: url("../../../assets/images/pig-bg.jpg") no-repeat center center fixed;
+  background:
+  linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+  url("../../../assets/images/public-bg.jpg") no-repeat center center fixed;
   background-size: cover;
   height: 100vh;
   align-items: center;
   justify-content:flex-start;
   margin: 0;
   text-align: center;
+}
+
+.form-container{
+  width: 50%;
+  min-width: 651px;
+  min-height: 480px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding-bottom: 20px;
+}
+
+h2{
+  background-color: #ffeb3b;
+  padding: 20px;
+  width: 55%;
+  margin-top: -60px;
+  margin-left: -35px;
+  font-weight: 200;
+  box-shadow: 0 5px 5px rgba(0,0,0,.5);
 }

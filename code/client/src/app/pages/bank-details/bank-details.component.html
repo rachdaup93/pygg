@@ -1,4 +1,4 @@
-<main class="main grey lighten-5 row">
+<main class="main grey lighten-3 row">
 <div class="row col s6">
   <div class="col s12">
     <div id="details" class="card white">
@@ -17,6 +17,9 @@
       </div>
       <div class="card-action">
         <h5>Future Payments</h5>
+        <div *ngIf="bankInfo.payments.paymentLog.length === 0">
+          <h4>COMPLETED</h4>
+        </div>
         <div class="card-action" *ngFor="let log of bankInfo.payments.paymentLog">
           <p>${{ log.paymentVal.toFixed(2) }} due on {{ log.date }} </p>
         </div>

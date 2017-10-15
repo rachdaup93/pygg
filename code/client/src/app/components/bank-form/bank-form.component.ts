@@ -57,7 +57,6 @@ export class BankFormComponent implements OnInit, AfterViewInit {
     this.newBank.payments.paymentLog = this.calc.numberPeriod(this.newBank);
     this.newBank.payments.numberPaymentsLeft = this.newBank.payments.paymentLog.length;
 
-
     this.bank.addBank(this.newBank)
       .subscribe(
         (bankDetails: any) =>{

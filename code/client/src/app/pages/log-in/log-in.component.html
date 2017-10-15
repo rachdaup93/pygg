@@ -1,12 +1,11 @@
 <main class="main row">
-<div class="form-container">
+<div class="form-container card white">
   <div class="form-wrapper">
     <h2> Log In </h2>
     <p class="error" *ngIf="loginError">
       {{ loginError }}
     </p>
-
-    <form class="container col s12" (ngSubmit)="loginSubmit()">
+<form class="container col s12" (ngSubmit)="loginSubmit()">
       <div class="input-field col s12">
       <input  id="username-input" type="text"
             name="username" [(ngModel)]="loginUser.loginUsername">

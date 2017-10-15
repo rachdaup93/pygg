@@ -1,16 +1,22 @@
-<main class="main grey lighten-5 row">
+<main class="main row">
   <h3>Open Pyggie Jars</h3>
+  <button *ngIf="!isFormOn" class="waves-effect waves-light teal darken-2 btn" (click)="showForm()">Add a New Bank</button>
   <div class="row col m6">
     <div *ngIf="banks.length === 0">
       <p>You currently don't have any open savings banks.</p>
-      <button *ngIf="!isFormOn" class="waves-effect waves-light teal darken-2 btn" (click)="showForm()">Add a New Bank</button>
-      <div id="form-card" *ngIf="isFormOn" class="card white">
-        <div class="card-content">
-          <a (click)="showForm()"><i class="small material-icons right">close</i></a>
-          <app-bank-form></app-bank-form>
-        </div>
+    </div>
+      <app-bank-list
+      [banks] = "banks"
+      ></app-bank-list>
+  </div>
+  <div class="form col s6" *ngIf="isFormOn">
+    <div id="form-card"  class="card white">
+      <div class="card-content">
+        <a (click)="showForm()"><i class="small material-icons right">close</i></a>
+        <app-bank-form
+        (newBankNotifier)="addBank($event)"
+        ></app-bank-form>
       </div>
     </div>
-    <app-bank-list></app-bank-list>
   </div>
 </main>

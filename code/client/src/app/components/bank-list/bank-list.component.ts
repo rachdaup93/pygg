@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { BankApiService } from '../../services/bank-api.service';
 import { BanklistService } from '../../services/banklist.service';
 
@@ -8,12 +8,13 @@ import { BanklistService } from '../../services/banklist.service';
   styleUrls: ['./bank-list.component.css']
 })
 export class BankListComponent implements OnInit {
-  banks: any[]  = [];
+  @Input() banks: any[];
   constructor(
-    private bankList: BanklistService
+    private bank: BankApiService
   ) { }
 
   ngOnInit() {
-    this.banks = this.bankList.openBanks
+  }
+  ngAfterContentInit(){
   }
 }
