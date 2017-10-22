@@ -41,7 +41,7 @@ RemainderSchema.statics.sendNotifications = function(callback) {
         remainders.forEach(function(remainder) {
             // Create options to send the message
             const options = {
-                to: `+ ${remainder.phoneNumber}`,
+                to: `+1${remainder.phoneNumber}`,
                 from: cfg.twilioPhoneNumber,
                 /* eslint-disable max-len */
                 body: `PYGG Reminder: Hi ${remainder.name}, your payment of $${remainder.payment.paymentVal} is due for Pyggie Bank: ${remainder.bank}`,
