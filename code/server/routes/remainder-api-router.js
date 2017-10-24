@@ -22,9 +22,8 @@ router.get('/remainders', function(req, res, next) {
     })
 });
 
-// GET: /remainders/create
+// POST: /newBankNotifier
 router.post('/remainders/newBankNotifier', function(req, res, next) {
-  console.log("test")
   const client = new Twilio(cfg.twilioAccountSid, cfg.twilioAuthToken);
   // Create options to send the message
   const options = {
@@ -39,11 +38,36 @@ router.post('/remainders/newBankNotifier', function(req, res, next) {
   client.messages.create(options, function(err, response) {
       if (err) {
           // Just log it for now
-          res.status(500).json({ErrorMessage: "Oh no"})
+          res.status(500).json({ErrorMessage: "SMS message could not be sent."})
           console.error(err);
       } else {
           // Log the last few digits of a phone number
-          res.status(200).json({SuccessMessage: "Yay!"})
+          res.status(200).json({SuccessMessage: "SMS message was sent successfully."})
+      }
+  });
+});
+
+// POST: /bankUpdateNotifier
+router.post('/remainders/bankUpdateNotifier', function(req, res, next) {
+  const client = new Twilio(cfg.twilioAccountSid, cfg.twilioAuthToken);
+  // Create options to send the message
+  const options = {
+      to: `+1 ${req.body.phoneNumber}`,
+      from: cfg.twilioPhoneNumber,
+      /* eslint-disable max-len */
+      body: `Hi ${req.body.firstName}! NOTICE: One of your Pyggie Banks has been updated: ${req.body.title}. Your next payment is now due on ${req.body.dueDate} of $${req.body.payment.toFixed(2)}.`,
+      /* eslint-enable max-len */
+};
+
+  // Send the message!
+  client.messages.create(options, function(err, response) {
+      if (err) {
+          // Just log it for now
+          res.status(500).json({ErrorMessage: "SMS message could not be sent."})
+          console.error(err);
+      } else {
+          // Log the last few digits of a phone number
+          res.status(200).json({SuccessMessage: "SMS message was sent successfully."})
       }
   });
 });
