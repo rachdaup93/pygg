@@ -44,6 +44,18 @@ export class BankEditComponent implements OnInit {
       .subscribe(
         (bankDetails: any) =>{
           console.log('Successful update')
+          this.remainder.updateBank({
+            firstName: "Rachelle",
+            title: bankDetails.title,
+            phoneNumber: "9548029957",
+            payment: bankDetails.payments.paymentLog[0].paymentVal,
+            dueDate: bankDetails.payments.paymentLog[0].date
+          })
+            .subscribe(
+              (messageDetails) =>{
+                console.log("Message sent successfully.")
+              }
+            )
     });
   }
 }
