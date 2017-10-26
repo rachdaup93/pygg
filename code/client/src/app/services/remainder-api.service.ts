@@ -18,10 +18,16 @@ export class RemainderApiService {
       remainderObject
     );}
 
-  sendNow(remainderObject){
+  newBank(bankObject){
     return this.http.post(
       this.baseUrl + '/api/remainders/newBankNotifier',
-      remainderObject
+      bankObject
+    );
+  }
+  updateBank(remainderObject){
+    return this.http.post(
+      this.baseUrl + '/api/remainders/bankUpdateNotifier',
+      bankObject
     );
   }
 }

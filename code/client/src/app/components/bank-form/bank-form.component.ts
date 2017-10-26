@@ -60,7 +60,7 @@ export class BankFormComponent implements OnInit, AfterViewInit {
     this.bank.addBank(this.newBank)
       .subscribe(
         (bankDetails: any) =>{
-          this.remainder.sendNow({
+          this.remainder.newBank({
             firstName: "Rachelle",
             title: bankDetails.title,
             phoneNumber: "9548029957",

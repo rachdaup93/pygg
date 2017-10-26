@@ -42,7 +42,7 @@ export class BankEditComponent implements OnInit {
 
     this.bank.editBank(this.bankInfo)
       .subscribe(
-        (bankDetails: any) =>{
+        (bankDetails: any)=>{
           console.log('Successful update')
           this.remainder.updateBank({
             firstName: "Rachelle",
